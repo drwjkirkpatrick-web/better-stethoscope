@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+dist/
+build/
+*.egg-info/
+.pytest_cache/
+.coverage
+
+# Recorded patient audio must NEVER be committed (PHI + large binaries).
+# Sessions live under recordings/ by default; keep them out of git entirely.
+recordings/
+*.wav
+*.flac
+*.zip
+
+# Exception: tiny, synthetic test fixtures are allowed if we ever add them.
+!tests/data/*.wav
+
+# OS noise
+.DS_Store

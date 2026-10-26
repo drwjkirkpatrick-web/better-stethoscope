@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "better-stethoscope"
+version = "0.1.0"
+description = "High-quality heart-sound (phonocardiogram) recording on a Raspberry Pi, with a microphone differential and a recording module for each candidate front-end."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "drwjkirkpatrick-web" }]
+keywords = ["stethoscope", "phonocardiography", "raspberry-pi", "heart-sounds", "telemedicine"]
+
+# WHY these pins: heart sounds live between 20 Hz and 2000 Hz, so the audio
+# stack must (1) actually capture below 100 Hz, (2) run comfortably on a Pi 4/5.
+# numpy/scipy do the DSP, soundfile writes 24-bit WAV/FLAC (libsndfile is
+# bundled in its wheels), sounddevice wraps PortAudio (needs the OS package
+# libportaudio2 on the Pi), matplotlib renders spectrograms for the physician.
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "soundfile>=0.12",
+    "sounddevice>=0.4.6",
+    "matplotlib>=3.7",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+better-stethoscope = "better_stethoscope.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["better_stethoscope*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
