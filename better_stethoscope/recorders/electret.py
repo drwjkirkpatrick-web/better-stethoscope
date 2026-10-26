@@ -34,7 +34,7 @@ docs/microphone-differential.md.
 
 from __future__ import annotations
 
-from typing import Iterator
+from typing import Generator
 
 import numpy as np
 
@@ -88,7 +88,7 @@ class ElectretRecorder(BaseRecorder):
     # or HDMI, which never carry this front-end.
     device_match = ("c-media", "cm108", "usb pnp", "audio adapter", "usb audio")
 
-    def _iter_blocks(self) -> Iterator[np.ndarray]:
+    def _iter_blocks(self) -> Generator[np.ndarray, None, None]:
         # Same canonical capture loop as every sounddevice module: the
         # callback-queue pattern in base._callback_blocks decouples the
         # PortAudio callback from our consumer so nothing drops frames.

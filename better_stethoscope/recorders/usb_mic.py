@@ -23,7 +23,7 @@ with a fake backend (see tests/conftest.py); no hardware needed.
 
 from __future__ import annotations
 
-from typing import Iterator
+from typing import Generator
 
 import numpy as np
 
@@ -55,5 +55,5 @@ class UsbMicRecorder(BaseRecorder):
     # documented in base.py).
     device_match = ()
 
-    def _iter_blocks(self) -> Iterator[np.ndarray]:
+    def _iter_blocks(self) -> Generator[np.ndarray, None, None]:
         return self._callback_blocks()
