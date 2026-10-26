@@ -55,7 +55,7 @@ class SessionConfig:
     positions: list[str] = field(
         default_factory=lambda: ["aortic", "pulmonic", "erbs", "tricuspid", "mitral"]
     )
-    seconds_per_position: int = 15    # >= 10 s: enough beats for BPM confidence
+    seconds_per_position: float = 15      # >= 10 s: enough beats for BPM confidence
     countdown_seconds: int = 3       # "quiet... place... hold" settle time
     interactive: bool = True          # prompt accept/re-record after each take
     patient_label: str = ""           # OPTIONAL free-text label (see PHI note)
